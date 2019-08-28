@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="bindget">get</button>
+    <button id="bindpost">post</button>
+    <script src=" /static/js/jquery.js"></script>
+    <script>
+        $('#bindget').click(function () {
+            $.getJSON("/ajax_list/", { test: 123 }, function (res) {
+                console.log(res)
+            })
+        })
+        $('#bindpost').click(function () {
+            $.ajax({
+                url:"/post_ajax/",
+                headers:{"Content-type":"application/x-www-form-urlencoded"},
+                type: "post",
+                data: {
+                    user: 'admin',
+                    pwd: '123456'
+                },
+                success: function (e) {
+                    console.log(e)
+                },
+            })
+        })
+    </script>
+</body>
+
+</html>
