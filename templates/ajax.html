@@ -11,6 +11,7 @@
 <body>
     <button id="bindget">get</button>
     <button id="bindpost">post</button>
+    <button id="bindemail">email</button>
     <script src=" /static/js/jquery.js"></script>
     <script>
         $('#bindget').click(function () {
@@ -27,6 +28,16 @@
                     user: 'admin',
                     pwd: '123456'
                 },
+                success: function (e) {
+                    console.log(e)
+                },
+            })
+        })
+        $('#bindemail').click(function () {
+            $.ajax({
+                url:"/send_email/",
+                headers:{"Content-type":"application/x-www-form-urlencoded"},
+                type: "post",
                 success: function (e) {
                     console.log(e)
                 },
