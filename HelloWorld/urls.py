@@ -9,5 +9,6 @@ urlpatterns=[
     path('ajax/', ajax.ajax),
     path('ajax_list/', ajax.ajax_list, name='ajax-list'),
     path('post_ajax/', ajax.post_ajax, name='post-ajax'),
+    path('login/', ajax.login, name='login'),
     path('send_email/', ajax.send_email, name='send_email'),
 ]

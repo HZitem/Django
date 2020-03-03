@@ -6,3 +6,4 @@ class Test(models.Model):
 
 class Name(models.Model):
     name = models.CharField(max_length=20)
+

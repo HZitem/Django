@@ -1,5 +1,8 @@
 
 from django.shortcuts import render
+import _thread
+import time
+
 
 
 def hello(request):

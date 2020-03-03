@@ -2,13 +2,14 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from SqlModel.models import Name
+from Auth.models import User
 from django.core.mail import send_mail
 import os 
 from HelloWorld.settings import PROJECT_ROOT 
 def ajax(request):
    file_ = open(os.path.join(PROJECT_ROOT,'runoob.txt'), "r+")
    str = "test\n"
-# 在文件末尾写入一行
+   # 在文件末尾写入一行
    file_.seek(0, 2)
    line = file_.write( str )
    file_.close()
@@ -16,6 +17,7 @@ def ajax(request):
 
 
 def ajax_list(request):
+    print (request)
     # Test.objects.filter(id=2).update(name='Facebook')
     # Test.objects.filter(id=5).delete()
     data = Name.objects.values('id', 'name')
@@ -27,6 +29,12 @@ def post_ajax(request):
     password = request.POST.get('pwd', '')
     info = {'username': username, 'password': password}
     return JsonResponse(info, safe=False)
+
+def login(request): #登录接口
+    username = request.POST.get('user', '')
+    password = request.POST.get('pwd', '')
+    data = User.objects.values()
+    return JsonResponse(list(data), safe=False)
 
 
 def send_email(request):
