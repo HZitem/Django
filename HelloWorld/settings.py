@@ -25,7 +25,8 @@ SECRET_KEY = '*4nln9v0u6-$04urozol^%wu(#ozbo43*)(_^yhya)u737s-(z'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.10.184', '192.168.10.184:8001','localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['192.168.10.184',
+                 '192.168.10.184:8001', 'localhost', '127.0.0.1']
 
 # Application definition
 
@@ -35,10 +36,9 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'corsheaders', # 接口跨域需要用到的
+    'corsheaders',  # 接口跨域需要用到的
     'django.contrib.staticfiles',
     'SqlModel',               # 添加此项
-    'Auth',
 ]
 
 MIDDLEWARE = [
@@ -75,7 +75,7 @@ WSGI_APPLICATION = 'HelloWorld.wsgi.application'
 
 # CORS 配置
 CORS_ORIGIN_WHITELIST = [
-# 凡是出现在白名单中的域名，都可以访问后端接口
+    # 凡是出现在白名单中的域名，都可以访问后端接口
     'http://192.168.10.184:8001',
     'http://192.168.10.184:9999'
 ]
@@ -137,7 +137,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
-PROJECT_ROOT = BASE_DIR+"/file"   
+PROJECT_ROOT = BASE_DIR+"/file"
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "common_static"),
 )

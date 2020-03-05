@@ -1,1 +1,27 @@
 <h1>{{ hello }}</h1>
+<input id="chat-message-input" type="text" size="100" /><br />
+<input
+  id="chat-message-submit"
+  type="button"
+  value="Send"
+  onclick="sendmessage()"
+/>
+<script>
+  var socket = new WebSocket('ws:' + window.location.host + '/test_websocket/')
+  socket.onopen = function() {
+    console.log('WebSocket open') //成功连接上Websocket
+  }
+  socket.onmessage = function(e) {
+    console.log('message: ' + e.data) //打印服务端返回的数据
+  }
+  socket.onclose = function(e) {
+    console.log(e)
+    socket.close() //关闭TCP连接
+  }
+  if (socket.readyState == WebSocket.OPEN) {
+    socket.onopen()
+  }
+  function sendmessage() {
+    socket.send('6666666')
+  }
+</script>
