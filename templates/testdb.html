@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>django</title>
+</head>
+
+<body>
+
+    SqlmodelPermission 表:
+    {%  for row in list %}
+    <p>{{ row.name }}</p>
+    {% endfor %}
+
+    <button class="next">下一页</button>
+    <script src=" /static/js/jquery.js"></script>
+    <script>
+        var page = 0;
+        $('.next').click(function () {
+            page++;
+            $.ajax({
+                url: "/sharePage/",
+                headers: { "Content-type": "application/x-www-form-urlencoded" },
+                type: "get",
+                data: {
+                    page
+                },
+                success: function (e) {
+                    console.log(e)
+                },
+            })
+        })
+
+    </script>
+</body>
+
+</html>

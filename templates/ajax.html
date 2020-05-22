@@ -9,26 +9,53 @@
 </head>
 
 <body>
-    <button id="bindget">get</button>
-    <button id="bindpost">post</button>
-    <button id="bindemail">email</button>
-    <button id="bindMysql">Mysql_Auth</button>
+    <button id="bindget">请求-get</button>
+    <button id="bindpost">请求-post</button>
+    <button id="bindemail">发送Email</button>
+    <button id="requests">后台requests</button>
+    <button id="next">分页功能</button>
+    <button id="editFile">修改文件</button>
     <script src=" /static/js/jquery.js"></script>
     <script>
+        var page = 0;
+        $('#next').click(function () {
+            page++;
+            $.ajax({
+                url: "/sharePage/",
+                headers: { "Content-type": "application/x-www-form-urlencoded" },
+                type: "get",
+                data: {
+                    page
+                },
+                success: function (e) {
+                    console.log(e)
+                },
+            })
+        })
+        $('#requests').click(function () {
+            page++;
+            $.ajax({
+                url: "/test_requests/",
+                headers: { "Content-type": "application/x-www-form-urlencoded" },
+                type: "get",
+                data: {
+                    page
+                },
+                success: function (e) {
+                    console.log(e)
+                },
+            })
+        })
         $('#bindget').click(function () {
             $.getJSON("/ajax_list/", { test: 123 }, function (res) {
                 console.log(res)
             })
         })
-        $('#bindMysql').click(function () {
-            $.getJSON("/ajax_list_auth/", { test: 123 }, function (res) {
-                console.log(res)
-            })
-        })
+
         $('#bindpost').click(function () {
             $.ajax({
-                url:"/login/",
-                headers:{"Content-type":"application/x-www-form-urlencoded"},
+                url: "/login/",
+                headers: { "Content-type": "application/x-www-form-urlencoded" },
                 type: "post",
                 data: {
                     user: 'admin',
@@ -41,8 +68,26 @@
         })
         $('#bindemail').click(function () {
             $.ajax({
-                url:"/send_email/",
-                headers:{"Content-type":"application/x-www-form-urlencoded"},
+                url: "/send_email/",
+                headers: { "Content-type": "application/x-www-form-urlencoded" },
+                type: "post",
+                success: function (e) {
+                    console.log(e)
+                },
+            })
+        })
+        $('#editFile').click(function () {
+            var date = new Date();
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var strDate = date.getDate();
+            var currentdate = year + '-' + month + '-' + strDate;
+            $.ajax({
+                url: "/edit_file/",
+                headers: { "Content-type": "application/x-www-form-urlencoded" },
+                data: {
+                    text: currentdate + '\n',
+                },
                 type: "post",
                 success: function (e) {
                     console.log(e)
