@@ -12,10 +12,16 @@
     <button id="bindget">get</button>
     <button id="bindpost">post</button>
     <button id="bindemail">email</button>
+    <button id="bindMysql">Mysql_Auth</button>
     <script src=" /static/js/jquery.js"></script>
     <script>
         $('#bindget').click(function () {
             $.getJSON("/ajax_list/", { test: 123 }, function (res) {
+                console.log(res)
+            })
+        })
+        $('#bindMysql').click(function () {
+            $.getJSON("/ajax_list_auth/", { test: 123 }, function (res) {
                 console.log(res)
             })
         })

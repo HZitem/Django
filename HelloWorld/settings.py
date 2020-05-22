@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'corsheaders',  # 接口跨域需要用到的
     'django.contrib.staticfiles',
-    'SqlModel',               # 添加此项
+    'MyModel',
 ]
 
 MIDDLEWARE = [
