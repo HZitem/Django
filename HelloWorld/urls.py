@@ -12,6 +12,7 @@ urlpatterns = [
     # 接口
 
     path('sharePage/', ajax.sharePage, name='ajax-sharePage'),
+    path('register/', search.user_register, name='search-user_register'),
     path('ajax_list/', ajax.ajax_list, name='ajax-list'),
     path('test_requests/', ajax.test_requests, name='test_requests'),
     path('post_ajax/', ajax.post_ajax, name='post-ajax'),

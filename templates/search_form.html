@@ -1,13 +1,54 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="utf-8">
-<title>django</title>
+    <meta charset="utf-8">
+    <title>django</title>
+
+
 </head>
+
 <body>
+    <p>登录功能</p>
+    <form id="vm" v-on="submit: submit" class="uk-form uk-form-stacked">
+        <input id="login-email" type="text" maxlength="50" placeholder="email">
+        <input id="login-passwd" type="text" maxlength="50" placeholder="输入密码">
+        <button type="button" id="login">登录</button>
+    </form>
+
+    <p>注册功能</p>
+    <form id="vm" v-on="submit: submit" class="uk-form uk-form-stacked">
+        <input id="register-email" type="text" maxlength="50" placeholder="email">
+        <input id="register-passwd" type="text" maxlength="50" placeholder="输入密码">
+        <button type="button" id="register">注册</button>
+    </form>
+
+
+    <p>同步表单提交</p>
     <form action="/search" method="get">
         <input type="text" name="q">
         <input type="submit" value="搜索">
     </form>
+    <script src=" /static/js/jquery.js"></script>
+    <script>
+
+        $('#register').click(function () {
+            if ($('#register-email').val().length > 0 && $('#register-passwd').val().length > 0) {
+                $.ajax({
+                    url: "/register/",
+                    headers: { "Content-type": "application/x-www-form-urlencoded" },
+                    type: "post",
+                    data: {
+                        email: $('#register-email').val(),
+                        passwd: $('#register-passwd').val(),
+                    },
+                    success: function (e) {
+                        console.log(e)
+                    },
+                })
+            }
+        })
+    </script>
 </body>
+
 </html>
