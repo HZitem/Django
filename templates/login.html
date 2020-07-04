@@ -11,8 +11,8 @@
 <body>
     <p>登录功能</p>
     <form id="vm" v-on="submit: submit" class="uk-form uk-form-stacked">
-        <input id="login-email" type="text" maxlength="50" placeholder="email">
-        <input id="login-passwd" type="text" maxlength="50" placeholder="输入密码">
+        <input id="login-email" type="text" maxlength="50" placeholder="email" value="123@qq.com">
+        <input id="login-passwd" type="text" maxlength="50" placeholder="输入密码" value="123">
         <button type="button" id="login">登录</button>
     </form>
 
@@ -39,14 +39,32 @@
                     headers: { "Content-type": "application/x-www-form-urlencoded" },
                     type: "post",
                     data: {
-                        email: $('#register-email').val(),
-                        passwd: $('#register-passwd').val(),
+                        username: $('#register-email').val(),
+                        password: $('#register-passwd').val(),
                     },
                     success: function (e) {
                         console.log(e)
+
                     },
                 })
             }
+        })
+
+        $('#login').click(function () {
+            $.ajax({
+                url: "/login_user/",
+                headers: { "Content-type": "application/x-www-form-urlencoded" },
+                type: "post",
+                data: {
+                    username: $('#login-email').val(),
+                    password: $('#login-passwd').val(),
+                },
+                success: function (e) {
+                    console.log(e)
+                    alert(e.msg)
+                },
+            })
+            
         })
     </script>
 </body>

@@ -153,3 +153,7 @@ EMAIL_PORT = 465
 EMAIL_HOST_USER = '874035968@qq.com'  # 帐号
 EMAIL_HOST_PASSWORD = 'dcznfkwmqsmjbfgi'  # 密码
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+LOGIN_URL = '/login' 
+
+AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBackend']

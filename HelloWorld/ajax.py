@@ -37,17 +37,6 @@ def post_ajax(request):
     return JsonResponse(info, safe=False)
 
 
-def login(request):  # 登录接口
-    data = SqlmodelName.objects.values()
-    for x in data:
-        x['id'] = x['id'] + 100
-
-    str = "我叫 %s 今年 %d 岁!" % (data, 10)
-
-    print(str)
-    return JsonResponse(list(data), safe=False)
-
-
 def send_email(request):
     state = send_mail('Subject here', 'Here is the message.', '874035968@qq.com',
                       ['lin_huazhen@kawasakijp.com'], fail_silently=False)
