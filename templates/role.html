@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src=" /static/js/jquery.js"></script>
+    <style>
+        .active {
+            background-color: #f40 !important;
+        }
+
+        .box {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background-color: #ccc;
+        }
+
+        .name {
+            display: inline-block;
+        }
+        .more-list li{
+            display: inline-block;
+            padding: 0 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h3>角色列表</h3>
+        <ul>
+            <li v-for="(item,index) in permissions_List" :key="index" @click="switchs(index)">
+                <div class="box" :class="item.checked?'active':''"></div>
+                <div class="name" v-text="item.name"></div>
+            </li>
+        </ul>
+        <button @click="submit">提交</button>
+
+        <h3>添加角色</h3>
+        <button @click="permission_add">添加</button>
+        <h3>功能列表</h3>
+        <input type="text" v-model="addname">
+        <ul class="more-list" v-if="permission_List.length>0">
+            <li v-for="(item,index) in permission_List" :key="index" @click="switchs(index)">
+                <div class="box" :class="item.checked?'active':''"></div>
+                <div class="name" v-text="item.codename"></div>
+            </li>
+        </ul>
+
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                permissions_List: [],
+                permission_List: [],
+                addname: "",
+            },
+            methods: {
+                permission_add() {
+                    let self = this;
+                    let option = []
+                    this.permission_List.forEach(res => {
+                        if (res.checked) {
+                            option.push(res.id)
+                        }
+                    })
+                    if (this.addname.length > 0) {
+                        $.ajax({
+                            url: "/permissions_Add",
+                            headers: { "Content-type": "application/x-www-form-urlencoded" },
+                            type: "post",
+                            data: {
+                                permission_id: option.join("_"),
+                                name: this.addname
+                            },
+                            success: function (e) {
+                                console.log(e)
+                            },
+                        })
+                        // axios.post('/permissions_Add', {
+                        //     permission_id: option.join("_"),
+                        //     name: this.addname
+                        // })
+                        //     .then(function (response) {
+                        //         console.log(response);
+                        //     })
+                        //     .catch(function (error) {
+                        //         console.log(error);
+                        //     });
+
+
+                    }
+                },
+                switchs(i) {
+                    this.$set(this.permission_List[i], 'checked', !this.permission_List[i].checked)
+                },
+                submit() {
+                    console.log('ajax')
+                },
+                Fetch_permission_List() {
+                    let self = this;
+                    fetch('/permission_List')
+                        .then(function (response) {
+                            return response.json();
+                        })
+                        .then(function (res) {
+                            res.forEach(e => {
+                                e.checked = false;
+                            });
+                            self.permission_List = res;
+                        });
+                },
+                Fetch_permissions_List() {
+                    let self = this;
+                    fetch('/permissions_List')
+                        .then(function (response) {
+                            return response.json();
+                        })
+                        .then(function (res) {
+                            res.forEach(e => {
+                                e.checked = false;
+                            });
+                            self.permissions_List = res;
+                        });
+                },
+            },
+
+            mounted() {
+                this.Fetch_permission_List()
+                this.Fetch_permissions_List()
+            }
+        })
+    </script>
+</body>
+
+</html>

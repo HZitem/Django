@@ -27,6 +27,15 @@ class SqlmodelPermission(models.Model):
         unique_together = (('content_type_id', 'codename'),)
 
 
+class SqlmodelRole(models.Model):
+    permission_id = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
+    class Meta:
+        managed = True
+        db_table = 'sqlmodel_role'
+        unique_together = (('permission_id'),)
+
+
 class AuthUser(models.Model):
     password = models.CharField(max_length=128)
     last_login = models.DateTimeField(blank=True, null=True)
@@ -35,9 +44,11 @@ class AuthUser(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=150)
     email = models.CharField(max_length=254)
+    role = models.CharField(max_length=254)
     is_staff = models.IntegerField()
     is_active = models.IntegerField()
-    date_joined =  models.DateTimeField(auto_now_add=True)
+    date_joined = models.DateTimeField(auto_now_add=True)
+
     class Meta:
         managed = False
         db_table = 'auth_user'

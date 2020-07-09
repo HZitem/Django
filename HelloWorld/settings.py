@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'corsheaders',  # 接口跨域需要用到的
     'django.contrib.staticfiles',
     'MyModel',
+    'Middlewares',
 ]
 
 MIDDLEWARE = [
@@ -46,11 +47,11 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'Middlewares.middleware_test.Test'
+
 ]
 
 ROOT_URLCONF = 'HelloWorld.urls'

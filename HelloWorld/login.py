@@ -24,6 +24,7 @@ def user_login(request):
                 return JsonResponse({"msg": "帐号错误", "code": 101}, safe=False)
             if check_password(password, user.password):  # 校验密码
                 request.session['is_login'] = True
+                print("user",user)
                 request.session['user_id'] = user.id
                 userObj = authenticate(username=username, password=password)
                 login(request, userObj)
@@ -46,7 +47,7 @@ def user_register(request):
         user_profile.username = username
         user_profile.is_staff = 0
         user_profile.is_superuser = 1
-        user_profile.password = make_password(password, "a", 'pbkdf2_sha256')#指定方法加密
+        user_profile.password = make_password(password)#指定方法加密
         user_profile.is_active = 1  # 判断用户是否激活
         user_profile.save()
     return JsonResponse({"msg": "注册成功", "code": 20000}, safe=False)

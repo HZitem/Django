@@ -1,5 +1,5 @@
 from django.urls import path
-from . import websocket, login, ajax, thread
+from . import websocket, login, ajax, thread,role,errorPage
 
 urlpatterns = [
     # 页面
@@ -11,6 +11,9 @@ urlpatterns = [
     path('ajax/', ajax.ajax),
     path('search/', login.search),
     path('profile/', login.profile, name='profile'),
+    path('role/', role.view, name='view_role'),
+    path('errorPage', errorPage.view, name='errorPage'),
+
     # 接口
 
     path('sharePage/', ajax.sharePage, name='ajax-sharePage'),
@@ -21,6 +24,9 @@ urlpatterns = [
     path('login_user/', login.user_login, name='user_login'),
     path('edit_file/', ajax.edit_file, name='edit_file'),
     path('send_email/', ajax.send_email, name='send_email'),
+    path('permission_List', role.permission_List, name='permission_List'),
+    path('permissions_List', role.permissions_List, name='permissions_List'),
+    path('permissions_Add', role.permissions_Add, name='permissions_Add'),
     # 长连接
     path('test_websocket/', websocket.test_websocket, name='test_websocket'),
 ]

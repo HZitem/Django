@@ -1,16 +1,15 @@
 from django.shortcuts import render
 import threading
 import time
+from django.contrib.auth.decorators import login_required
 
-
+@login_required
 def view(request):
     context = {}
     context['hello'] = 'hello thread'
     dict = {'runoob': 'runoob.com', 'google': 'google.com'}
-    print(dict)
+    # print(dict)
     return render(request, 'hello.html', context)
-
-
 exitFlag = 0
 
 
@@ -22,9 +21,9 @@ class myThread (threading.Thread):
         self.counter = counter
 
     def run(self):
-        print("开始线程" + self.name)
+        # print("开始线程" + self.name)
         print_time(self.name, self.counter, 5)
-        print("退出线程:" + self.name)
+        # print("退出线程:" + self.name)
 
 
 def print_time(threadName, delay, counter):
@@ -32,7 +31,7 @@ def print_time(threadName, delay, counter):
         if exitFlag:
             threadName.exit()
         time.sleep(delay)
-        print("%s:%s" % (threadName, time.ctime(time.time())))
+        # print("%s:%s" % (threadName, time.ctime(time.time())))
         counter -= 1
 
 
@@ -47,4 +46,4 @@ thread2 = myThread(2, "Thread-2", 2)
 # thread1.join()
 # thread2.join()
 
-print("退出主线程")
+# print("退出主线程")
